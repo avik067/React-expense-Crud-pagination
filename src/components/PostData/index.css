@@ -1,0 +1,22 @@
+
+.green-but{
+    background-color: green;
+    border:none ;
+    padding: 5px;
+    color:white ;
+    margin: 5px;
+}
+p{
+    max-width:15%
+}
+.num-input{
+    min-width:34%
+}
+.red{
+    color: red;
+    min-width: 100%;
+}
+
+.cancel{
+    background-color: #3b2637;
+}

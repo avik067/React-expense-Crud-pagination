@@ -1,0 +1,30 @@
+
+.side-but-container{
+  min-width: 10%;
+}
+
+.data-list{
+  max-width: 98%;
+}
+
+.edit{
+    background-color: #3b8c5d;
+    border:1px solid black;
+    transition-duration: 0.4s
+}
+.del{
+    background-color: #f24e59;
+    border: 1px solid black;
+    outline: 4px;
+    transition-duration: 0.4s
+}
+
+.edit:hover {
+    background-color: #0af069;
+    color: white;
+  }
+  
+  .del:hover {
+    background-color: #eb1a13;
+    color: white;
+  }

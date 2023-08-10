@@ -1,0 +1,58 @@
+
+
+.main{ 
+    border :4px solid black ;
+    padding: 10px;
+    border-radius: 10px;
+    margin : 10px
+}
+.add {
+    background-color: green ;
+    outline: none;
+    border:none;
+    padding: 5px;
+    color:white ;
+}
+
+.header-list { 
+    background-color: gray;
+    max-width: 100%;
+    padding: 5px;
+}
+
+.p{ 
+    overflow: auto;
+    min-width:15% ;
+ font-size: 10px;
+ color:black;
+ font-weight: 700;
+}
+.button-gap {
+   min-width:50px
+}
+.next{
+  background-color: aqua;
+  border:none ;
+  outline:none;
+  margin: 2px;
+  padding-inline: 10px;
+}
+.pre{
+   background-color: brown;
+   border:none ;
+  outline:none;
+  margin: 2px;
+  padding-inline: 10px;
+}
+.search{
+    background-color:green ;
+}
+.center{
+    justify-content: center;
+}
+.apart{
+    justify-content: space-between;
+}
+.wrap{
+    flex-wrap:wrap ;
+}
