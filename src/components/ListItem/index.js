@@ -10,7 +10,11 @@ const ListItem = ({details,triggerDel,triggerPut}) => {
     }
     
     const delList =() =>{
-        triggerDel(_id)
+        if (window.confirm(`Are you sure want to delete : ${name}?`)) {  // we can also use react confirm package , but here we using browser native confirm that is why 
+                     // we are taking confirm method from the browser window
+            triggerDel(_id)
+        }
+        
     }
     
 
