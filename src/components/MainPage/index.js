@@ -8,15 +8,15 @@ import './index.css'
 
 class MainPage extends Component {
 
-    state = {arrayList:[],startIndedx:0 ,putOb:{} ,postOb:{},keyWord:'', endIndex:5,isLoading:true,showEdit:false,showPost:false}
+    state = {arrayList:[],limit:6 ,putOb:{} ,postOb:{},keyWord:'', page:1,isLoading:true,showEdit:false,showPost:false}
 
     componentDidMount () {
         this.getData()
     }  
     
     getData = async () => {
-      const {keyWord} = this.state
-      const  url= (keyWord === '') ? "https://crud-api-mongo-pagination.vercel.app/expenses" : `https://crud-api-mongo-pagination.vercel.app/expense/${keyWord}`
+      const {keyWord,page,limit} = this.state
+      const  url= (keyWord === '') ? `https://crud-api-mongo-pagination.vercel.app/expenses?limit=${limit}&page=${page}` : `https://crud-api-mongo-pagination.vercel.app/expense/${keyWord}`
       try {
         const rowData = await fetch(url)
         const jsonData = await rowData.json()
@@ -64,17 +64,25 @@ class MainPage extends Component {
       this.setState({showPost:true})
     }
 
-    nextPage = () => {
-      const  {arrayList,endIndex} = this.state
-      const a  = (arrayList.length >  endIndex  ) ? this.setState( pre => ({...pre, startIndedx:(pre.startIndedx + 5 ), endIndex:(pre.endIndex + 5)})) : ''
+    nextPage = async () => {
+      const  {arrayList} = this.state
+      if (true && arrayList.length > 0) { 
+        await this.setState( pre => ({...pre, page:(pre.page + 1 ),isLoading:true})) 
+        this.getData()
+      }
+    
       console.log("next")
    
   }
   
-  prePage = () => {
-        const {startIndedx} = this.state
-        const a  = (startIndedx >=5) ? this.setState( pre => ({...pre, startIndedx:(pre.startIndedx - 5 ), endIndex:(pre.endIndex - 5)})) : ''
-        console.log("next")
+  prePage = async () => {
+        const {page} = this.state
+        if  (page > 1) { 
+          await this.setState( pre => ({...pre, page:(pre.page - 1 ),isLoading:true}))
+          this.getData()
+       }
+        
+        console.log("pre")
     }
 
     changeKeyword = (event) =>{
@@ -82,8 +90,8 @@ class MainPage extends Component {
       this.setState({keyWord:key})
     }
     render () {
-          const {arrayList,isLoading,showEdit,putOb,showPost,startIndedx,endIndex} = this.state
-              const onlyShow = arrayList.slice(startIndedx,endIndex)
+          const {arrayList,isLoading,showEdit,putOb,showPost} = this.state
+              
         return (
           <>
             <div className="main">
@@ -114,7 +122,7 @@ class MainPage extends Component {
                                 ariaLabel="loading"
                                 
                     /></div>}
-                    {onlyShow.map(each=> <ListItem details={each} key={each._id} triggerDel={this.delFromDb} triggerPut={this.putInDb}/>)}
+                    {arrayList.map(each=> <ListItem details={each} key={each._id} triggerDel={this.delFromDb} triggerPut={this.putInDb}/>)}
 
                 </ul>
                 <button type="button" className="next" onClick={this.prePage}>Pre</button>
